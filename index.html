@@ -15,8 +15,8 @@
             --text-main: #d1d5db; 
             --text-title: #ffffff; 
             --cinematic-blue: #4fc3f7; 
-            --cinematic-red: #991b1b; 
-            --cinematic-gold: #bcaaa4; 
+            --cinematic-red: #ef4444; 
+            --cinematic-gold: #ffb300; 
             --border-thin: rgba(255, 255, 255, 0.08); 
         }
 
@@ -85,14 +85,14 @@
             padding: 15px 0;
             font-size: 0.85rem;
             letter-spacing: 2px;
-            color: var(--cinematic-gold);
+            color: #bcaaa4;
             text-transform: uppercase;
         }
 
         .stat-group { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 1; }
         .stat-label { opacity: 0.6; font-size: 0.7rem; }
         .stat-value { font-size: 1.2rem; font-weight: 400; color: var(--text-title); transition: color 0.3s; }
-        .stat-value.danger { color: var(--cinematic-red); text-shadow: 0 0 10px rgba(153, 27, 27, 0.6); }
+        .stat-value.danger { color: var(--cinematic-red); text-shadow: 0 0 10px rgba(239, 68, 68, 0.6); }
         .stat-value.safe { color: var(--cinematic-blue); text-shadow: 0 0 10px rgba(79, 195, 247, 0.4); }
 
         #top-split { display: flex; gap: 35px; width: 100%; }
@@ -100,11 +100,10 @@
         #top-right-pane { flex: 1; display: flex; flex-direction: column; }
         #bottom-center-pane { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 15px; gap: 20px; }
 
-        /* 비디오 & 이미지 스테이지 (16:9 비율 유지) */
         #media-stage-container {
             width: 100%;
             position: relative;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%; 
             background-color: #000;
             border: 1px solid var(--border-thin);
             box-shadow: inset 0 0 140px 40px var(--bg-base), inset 0 -80px 120px var(--bg-base);
@@ -117,18 +116,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 영역에 맞게 꽉 채움 */
+            object-fit: cover; 
             transition: opacity 1s ease-in-out;
             opacity: 0;
         }
         
         .title-screen-mode #media-stage-container {
             box-shadow: none;
-            padding-top: 65%; /* 타이틀 화면 비율 조절 */
+            padding-top: 65%; 
         }
         
         .title-screen-mode #image-stage, .title-screen-mode #video-stage {
-             object-fit: contain; /* 타이틀은 잘리지 않게 설정 */
+             object-fit: contain; 
         }
 
         #media-stage-container::after {
@@ -150,34 +149,79 @@
 
         #scene-description { font-size: 1.05rem; line-height: 1.8; color: var(--text-main); white-space: pre-wrap; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
 
-        #choices-box { width: 100%; max-width: 650px; display: flex; flex-direction: column; gap: 12px; animation: fadeIn 1.2s ease-out; }
+        /* 선택지 가로 배치 스타일 변경 */
+        #choices-box { 
+            width: 100%; 
+            display: flex; 
+            flex-direction: row; 
+            justify-content: center;
+            align-items: stretch;
+            gap: 15px; 
+            animation: fadeIn 1.2s ease-out; 
+        }
 
         .choice-btn {
-            background: var(--bg-surface);
+            flex: 1;
+            min-width: 150px;
             border: 1px solid var(--border-thin);
-            color: var(--text-main);
-            padding: 18px 20px;
+            color: #ffffff;
+            padding: 18px 15px;
             font-size: 0.95rem;
             font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 400;
             text-align: center;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             white-space: pre-wrap;
+            border-radius: 4px;
         }
 
-        .choice-btn::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: transparent; transition: background 0.4s; }
-        .choice-btn.choice-a:hover { background: rgba(153, 27, 27, 0.1); border-color: rgba(153, 27, 27, 0.4); box-shadow: 0 5px 20px rgba(153, 27, 27, 0.2); color: #fff; }
-        .choice-btn.choice-a:hover::before { background: var(--cinematic-red); }
-        .choice-btn.choice-b:hover { background: rgba(79, 195, 247, 0.08); border-color: rgba(79, 195, 247, 0.3); box-shadow: 0 5px 20px rgba(79, 195, 247, 0.15); color: #fff; }
-        .choice-btn.choice-b:hover::before { background: var(--cinematic-blue); }
+        .choice-btn::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: transparent; transition: background 0.3s; }
 
-        .start-btn { font-size: 1.1rem; letter-spacing: 2px; color: var(--text-title); background: rgba(255,255,255,0.03); }
-        .start-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+        /* 선택지별 확연히 다른 색상 (기본 및 호버) */
+        .choice-btn.choice-a {
+            background: rgba(153, 27, 27, 0.25);
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+        .choice-btn.choice-a::before { background: var(--cinematic-red); }
+        .choice-btn.choice-a:hover { 
+            background: rgba(239, 68, 68, 0.4); 
+            border-color: var(--cinematic-red); 
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .choice-btn.choice-b {
+            background: rgba(79, 195, 247, 0.15);
+            border-color: rgba(79, 195, 247, 0.4);
+        }
+        .choice-btn.choice-b::before { background: var(--cinematic-blue); }
+        .choice-btn.choice-b:hover { 
+            background: rgba(79, 195, 247, 0.3); 
+            border-color: var(--cinematic-blue); 
+            box-shadow: 0 0 20px rgba(79, 195, 247, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .choice-btn.choice-c {
+            background: rgba(255, 179, 0, 0.15);
+            border-color: rgba(255, 179, 0, 0.4);
+        }
+        .choice-btn.choice-c::before { background: var(--cinematic-gold); }
+        .choice-btn.choice-c:hover { 
+            background: rgba(255, 179, 0, 0.3); 
+            border-color: var(--cinematic-gold); 
+            box-shadow: 0 0 20px rgba(255, 179, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .start-btn { font-size: 1.1rem; letter-spacing: 2px; color: var(--text-title); background: rgba(255,255,255,0.03); flex: none; width: 250px; }
+        .start-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); transform: translateY(-2px); }
 
         #log-container {
             width: 100%; max-width: 650px; border-top: 1px solid var(--border-thin); margin-top: 10px; padding-top: 20px;
@@ -186,7 +230,7 @@
             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 100%);
         }
         .log-entry { margin-bottom: 8px; animation: fadeIn 0.5s ease-in; }
-        .log-time { color: var(--cinematic-gold); opacity: 0.5; margin-right: 8px; }
+        .log-time { color: #bcaaa4; opacity: 0.5; margin-right: 8px; }
         #log-container::-webkit-scrollbar { width: 4px; }
         #log-container::-webkit-scrollbar-track { background: transparent; }
         #log-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
@@ -217,9 +261,12 @@
         .title-screen-mode #game-header h1 { font-size: 3.5rem; text-shadow: 0 10px 30px rgba(255,255,255,0.15); }
         .title-screen-mode #top-split { flex-direction: column; }
 
+        /* 화면이 좁아지면 모바일에서는 세로 배치 전환 */
         @media (max-width: 768px) {
             #top-split { flex-direction: column; }
             .title-screen-mode #game-header h1 { font-size: 2.2rem; }
+            #choices-box { flex-direction: column; }
+            .choice-btn { width: 100%; }
         }
     </style>
 </head>
@@ -329,6 +376,7 @@
             if(changes.length > 0) { addLog(`동기화 변동: ${changes.join(', ')}`); }
         }
 
+        /* 괄호 안 대사와 지문을 완전 제거한 씬 데이터 */
         const scenes = {
             "TITLE": {
                 title: "", image: "cover.jpg", text: "",
@@ -336,38 +384,38 @@
             },
             "S01": {
                 title: "S01. 통보된 상실", video: "S1.mp4", 
-                text: "[배경] 퀴퀴한 곰팡내와 탁한 물방울이 일정한 간격으로 떨어지는 반지하 고시원. 창문 틈새로 스며든 싸구려 네온사인 불빛이 서아의 창백한 얼굴을 붉게 물들인다. 그때, 이현의 스마트폰 화면에 섬뜩한 알림음과 함께 '서아의 토큰 사용 완료' 시스템 통보가 뜬다. 서아는 눈을 맞추지 못한 채 덜덜 떨며 자신의 입술이 터지도록 짓씹고 있다.\n\n이현: (액정과 서아를 번갈아 보며, 목소리가 형편없이 떨린다) \"서아... 너 지금 무슨 짓을 한 거야? 방금 이 알림 뭐야? 네가 대체 무슨 대가를 지불했다는 건데!\"\n서아: \"이현아... 그게, 나는... 어쩔 수가 없었어. 이렇게라도 하지 않으면...\"",
+                text: "[배경] 퀴퀴한 곰팡내와 탁한 물방울이 일정한 간격으로 떨어지는 반지하 고시원. 창문 틈새로 스며든 싸구려 네온사인 불빛이 서아의 창백한 얼굴을 붉게 물들인다. 그때, 이현의 스마트폰 화면에 섬뜩한 알림음과 함께 '서아의 토큰 사용 완료' 시스템 통보가 뜬다. 서아는 눈을 맞추지 못한 채 덜덜 떨며 자신의 입술이 터지도록 짓씹고 있다.\n\n이현: \"서아... 너 지금 무슨 짓을 한 거야? 방금 이 알림 뭐야? 네가 대체 무슨 대가를 지불했다는 건데!\"\n서아: \"이현아... 그게, 나는... 어쩔 수가 없었어. 이렇게라도 하지 않으면...\"",
                 choices: [
-                    { text: "[A] \"무슨 짓 한 거야? 내 대가는!\"\n(주먹을 꽉 쥐며 분노와 당혹감으로 거칠게 다가섬)", style: "choice-a", action: () => { state.trust -= 15; state.desire += 10; }, next: "S02" },
-                    { text: "[B] \"네가 무사하면 됐어. 진정하자.\"\n(떨리는 손을 억누르며, 애써 다정한 목소리로 서아의 어깨에 손을 올림)", style: "choice-b", action: () => { state.trust += 5; state.desire += 5; }, next: "S02" }
+                    { text: "[A] \"무슨 짓 한 거야? 내 대가는!\"", style: "choice-a", action: () => { state.trust -= 15; state.desire += 10; }, next: "S02" },
+                    { text: "[B] \"네가 무사하면 됐어. 진정하자.\"", style: "choice-b", action: () => { state.trust += 5; state.desire += 5; }, next: "S02" }
                 ]
             },
             "S02": {
                 title: "S02. 강제된 딜레마", video: "S2.mp4", 
-                text: "[배경] 갑자기 스마트폰 액정이 먹통이 되더니, 붉은 코드가 뱀처럼 기어 다니며 기괴하게 웃는 지니 AI의 홀로그램이 허공에 투사된다.\n\n지니 AI: (기계음이 섞인 간사한 목소리) \"진실을 마주할 용기가 있으신가요? 아주 작은 기억 하나만 대가로 지불하시면, 파트너가 무엇을 바랐는지 당장 확인시켜 드리죠. 낄낄.\"\n서아: (사색이 되어 이현의 팔을 붙잡으며) \"안 돼! 이현아, 제발... 그거 누르지 마. 저건 널 망가뜨리려고 하는 함정이야!\"",
+                text: "[배경] 갑자기 스마트폰 액정이 먹통이 되더니, 붉은 코드가 뱀처럼 기어 다니며 기괴하게 웃는 지니 AI의 홀로그램이 허공에 투사된다.\n\n지니 AI: \"진실을 마주할 용기가 있으신가요? 아주 작은 기억 하나만 대가로 지불하시면, 파트너가 무엇을 바랐는지 당장 확인시켜 드리죠. 낄낄.\"\n서아: \"안 돼! 이현아, 제발... 그거 누르지 마. 저건 널 망가뜨리려고 하는 함정이야!\"",
                 choices: [
-                    { text: "[A] 당장 확인한다.\n(서아의 만류에도 망설임을 끊어내듯, 거칠게 수락 버튼을 짓누름)", style: "choice-a", action: () => { state.crack += 20; state.desire += 15; state.trust -= 20; }, next: "S03" },
-                    { text: "[B] 앱을 끈다.\n(절박하게 애원하는 서아의 눈빛을 외면하지 못하고 강제 종료함)", style: "choice-b", action: () => { state.trust += 15; state.desire -= 5; state.crack += 5; }, next: "S03" }
+                    { text: "[A] 당장 확인한다.", style: "choice-a", action: () => { state.crack += 20; state.desire += 15; state.trust -= 20; }, next: "S03" },
+                    { text: "[B] 앱을 끈다.", style: "choice-b", action: () => { state.trust += 15; state.desire -= 5; state.crack += 5; }, next: "S03" }
                 ]
             },
             "S03": {
                 title: "S03. 영혼역 진입", video: "S3.mp4", 
                 getText: () => {
-                    let baseText = "[배경] 세상의 이면, 자욱한 네온 스모그와 지독한 곰팡내가 진동하는 '영혼역'. 낡은 제복을 걸친 역장 할머니가 뒷짐을 진 채 어둠 속에서 걸어 나온다.\n\n역장 할머니: \"쯧쯧... 또 길 잃은 어린 짐승들이 기어들어 왔구만. 이 지독한 역귀(역의 귀신) 소굴에 뭘 얻자고 제 발로 들어왔누?\"";
+                    let baseText = "[배경] 세상의 이면, 자욱한 네온 스모그와 지독한 곰팡내가 진동하는 '영혼역'. 낡은 제복을 걸친 역장 할머니가 뒷짐을 진 채 어둠 속에서 걸어 나온다.\n\n역장 할머니: \"쯧쯧... 또 길 잃은 어린 짐승들이 기어들어 왔구만. 이 지독한 역귀 소굴에 뭘 얻자고 제 발로 들어왔누?\"";
                     if (state.crack >= 30) baseText += "\n\n(할머니가 혀를 차며 약관의 숨겨진 조항을 암시하듯 이현의 스마트폰을 지팡이로 툭툭 친다.)";
                     return baseText;
                 },
                 choices: [
-                    { text: "[A] \"서아가 대체 뭘 잃었는지 알려주세요.\"\n(서아를 곁눈질하며 피어오르는 의심과 불안감을 감추지 못함)", style: "choice-a", action: () => { state.desire += 10; state.trust -= 5; }, next: "S04" },
-                    { text: "[B] \"원래대로 돌아갈 방법은요? 어떻게 해야 이 미친 곳을 빠져나갈 수 있죠?\"\n(주먹을 꽉 쥐고 할머니의 탁한 눈을 정면으로 마주함)", style: "choice-b", action: () => { state.desire -= 5; addLog("롤백 힌트가 누적되었습니다."); }, next: "S04" }
+                    { text: "[A] \"서아가 대체 뭘 잃었는지 알려주세요.\"", style: "choice-a", action: () => { state.desire += 10; state.trust -= 5; }, next: "S04" },
+                    { text: "[B] \"원래대로 돌아갈 방법은요? 어떻게 해야 이 미친 곳을 빠져나갈 수 있죠?\"", style: "choice-b", action: () => { state.desire -= 5; addLog("롤백 힌트가 누적되었습니다."); }, next: "S04" }
                 ]
             },
             "S04": {
                 title: "S04. 대가 암시장", video: "S4.mp4", 
-                text: "[배경] 축축한 뒷골목. 갑자기 서아의 피부에 기괴한 푸른 균열이 생기며 그녀가 비명을 지르며 쓰러진다. 일렉트릭 퍼플 배지를 단 정장 차림의 브로커가 나타나, 핏빛 글씨가 적힌 계약서를 내민다.\n\n브로커: (입꼬리를 비릿하게 올리며) \"파트너께서 아주 값비싼 대가를 치르고 계시군요. 제게 서명만 하신다면, 그 고통... 제가 완벽하게 전가해 드릴 수 있습니다만. 약간의 '균열'만 감수하신다면 말이죠.\"\n서아: (바닥을 긁으며 헐떡이는 목소리) \"아아악...! 이현아, 하지 마... 제발 도망쳐...!\"",
+                text: "[배경] 축축한 뒷골목. 갑자기 서아의 피부에 기괴한 푸른 균열이 생기며 그녀가 비명을 지르며 쓰러진다. 일렉트릭 퍼플 배지를 단 정장 차림의 브로커가 나타나, 핏빛 글씨가 적힌 계약서를 내민다.\n\n브로커: \"파트너께서 아주 값비싼 대가를 치르고 계시군요. 제게 서명만 하신다면, 그 고통... 제가 완벽하게 전가해 드릴 수 있습니다만. 약간의 '균열'만 감수하신다면 말이죠.\"\n서아: \"아아악...! 이현아, 하지 마... 제발 도망쳐...!\"",
                 choices: [
-                    { text: "[A] 브로커와 거래한다.\n(짓누르는 죄책감을 뒤로하고, 서아를 살리기 위해 떨리는 손으로 서명을 향해 손을 뻗음)", style: "choice-a", action: () => { state.trust += 15; state.crack += 30; addLog("서아가 일시적으로 회복되었습니다."); }, next: "S05" },
-                    { text: "[B] 거래를 거절하고 서아를 부축한다.\n(패드를 거칠게 밀쳐내고 불덩이처럼 달아오른 서아를 끌어안음)", style: "choice-b", action: () => { state.trust += 5; state.desire -= 10; addLog("서아의 고통이 심화되었습니다."); }, next: "S05" }
+                    { text: "[A] 브로커와 거래한다.", style: "choice-a", action: () => { state.trust += 15; state.crack += 30; addLog("서아가 일시적으로 회복되었습니다."); }, next: "S05" },
+                    { text: "[B] 거래를 거절하고 서아를 부축한다.", style: "choice-b", action: () => { state.trust += 5; state.desire -= 10; addLog("서아의 고통이 심화되었습니다."); }, next: "S05" }
                 ]
             },
             "S05": {
@@ -379,17 +427,17 @@
                     return baseText;
                 },
                 choices: [
-                    { text: "[A] \"내 파트너가 죽어가고 있다고! 비켜, 다 부숴버리기 전에!\"\n(서아를 등 뒤로 숨기고 짐승처럼 으르렁대며 돌파를 시도함)", style: "choice-a", action: () => { state.crack += 10; addLog("충돌이 발생했습니다."); }, next: "S06" },
-                    { text: "[B] 침묵하며 뒷걸음질 쳐 도망친다.\n(압도적인 공포와 위압감에 질려 시선을 피하며 쫓기듯 물러섬)", style: "choice-b", action: () => { state.desire += 10; addLog("시간 루프 페널티가 발생했습니다."); }, next: "S06" }
+                    { text: "[A] \"내 파트너가 죽어가고 있다고! 비켜, 다 부숴버리기 전에!\"", style: "choice-a", action: () => { state.crack += 10; addLog("충돌이 발생했습니다."); }, next: "S06" },
+                    { text: "[B] 침묵하며 뒷걸음질 쳐 도망친다.", style: "choice-b", action: () => { state.desire += 10; addLog("시간 루프 페널티가 발생했습니다."); }, next: "S06" }
                 ]
             },
             "S06": {
                 title: "S06. 두 번째 소원 위기", video: "S6.mp4", 
                 text: "[배경] 주변 공간이 픽셀처럼 깨어지며 붕괴하는 환영 속, 서아가 피를 토하며 위독해진다. 붉고 거대해진 지니 AI가 강제로 팝업을 띄운다.\n\n지니 AI: \"오, 이런! 파트너의 생명줄이 끊어지기 직전이군요! 특별히 해결책을 드리죠. 신체를 기계로 대체하는 '물리적 개조'나, 고통을 느끼는 '감정의 완전 삭제'! 어느 쪽이든 인간성은 좀 포기해야겠지만요. 자, 서두르세요!\"",
                 choices: [
-                    { text: "[A] \"서아를 고쳐줘! 어떻게 되든 상관없어!\"\n(목숨만은 살리겠다는 처절한 결단으로 버튼을 향해 외침)", style: "choice-a", action: () => { state.crack += 25; state.trust -= 30; state.tokens -= 1; }, next: "S07" },
-                    { text: "[B] \"고통을 없애줘... 제발 아프지 않게만 해줘.\"\n(고통에 몸부림치는 서아를 도저히 볼 수 없어 덜덜 떨며 말함)", style: "choice-a", action: () => { state.desire += 20; state.tokens -= 1; }, next: "S07" },
-                    { text: "[C] 끝까지 버틴다.\n(이 악마 같은 선택지를 거부하며, 피투성이가 된 주먹으로 홀로그램 화면을 내리침)", style: "choice-b", action: () => { state.desire -= 15; state.crack += 40; }, next: "S07" }
+                    { text: "[A] \"서아를 고쳐줘! 어떻게 되든 상관없어!\"", style: "choice-a", action: () => { state.crack += 25; state.trust -= 30; state.tokens -= 1; }, next: "S07" },
+                    { text: "[B] \"고통을 없애줘... 제발 아프지 않게만 해줘.\"", style: "choice-b", action: () => { state.desire += 20; state.tokens -= 1; }, next: "S07" },
+                    { text: "[C] 끝까지 버틴다.", style: "choice-c", action: () => { state.desire -= 15; state.crack += 40; }, next: "S07" }
                 ]
             },
             "S07": {
@@ -399,10 +447,10 @@
                         return { text: "[배경] 서로를 향한 믿음이 굳건하여 시스템의 이간질 팝업이 뜨지 않는다.\n\n이현은 서아의 차가운 손을 굳게 쥐고 있다. 무언의 신뢰가 두 사람 사이의 붕괴를 간신히 지탱한다.", choices: [{ text: "계속 전진한다.", style: "choice-b", action: () => {}, next: "S08" }] };
                     } else {
                         return {
-                            text: "[조건 분기: 신뢰 30 이하]\n지니 AI가 조롱 섞인 웃음과 함께 비밀을 폭로한다.\n\n지니 AI: \"이현 씨, 당신은 정말 바보 같군요. 서아의 첫 번째 소원이 당신을 구하기 위한 거라고 믿었나요? 사실 그녀의 소원은... 온전히 자기 자신을 위한 거였답니다!\"\n서아: (눈물을 터뜨리며) \"아니야! 이현아, 내 말 좀 들어봐. 그때는... 그때는 너무 무서워서, 내가 살려면 어쩔 수 없었어...!\"",
+                            text: "[조건 분기: 신뢰 30 이하]\n지니 AI가 조롱 섞인 웃음과 함께 비밀을 폭로한다.\n\n지니 AI: \"이현 씨, 당신은 정말 바보 같군요. 서아의 첫 번째 소원이 당신을 구하기 위한 거라고 믿었나요? 사실 그녀의 소원은... 온전히 자기 자신을 위한 거였답니다!\"\n서아: \"아니야! 이현아, 내 말 좀 들어봐. 그때는... 그때는 너무 무서워서, 내가 살려면 어쩔 수 없었어...!\"",
                             choices: [
-                                { text: "[A] \"결국 다 나를 속인 거였어?! 처음부터 끝까지 다 거짓말이었냐고!\"\n(애원하는 서아의 손을 쳐내며, 걷잡을 수 없는 배신감에 일그러져 소리침)", style: "choice-a", action: () => { addLog("배신 확정. 서아가 도주했습니다."); }, next: "ENDING_B" },
-                                { text: "[B] \"...그랬겠지. 너도 살고 싶었을 테니까. 그럴 수밖에 없었겠지.\"\n(가슴을 찌르는 배신감을 삼키고, 허탈하게 체념하듯 읊조림)", style: "choice-b", action: () => { state.desire -= 10; addLog("아슬아슬한 동행이 유지됩니다."); }, next: "S08" }
+                                { text: "[A] \"결국 다 나를 속인 거였어?! 처음부터 끝까지 다 거짓말이었냐고!\"", style: "choice-a", action: () => { addLog("배신 확정. 서아가 도주했습니다."); }, next: "ENDING_B" },
+                                { text: "[B] \"...그랬겠지. 너도 살고 싶었을 테니까. 그럴 수밖에 없었겠지.\"", style: "choice-b", action: () => { state.desire -= 10; addLog("아슬아슬한 동행이 유지됩니다."); }, next: "S08" }
                             ]
                         };
                     }
@@ -417,8 +465,8 @@
                         return {
                             text: "[배경] 영혼역이 지상으로 부상하며 현실 세계의 하늘이 시뻘겋게 갈라지며 붕괴하기 시작한다.\n\n허공에 시뻘건 시스템 팝업이 나타나 이현의 내면을 뒤흔든다.\n시스템 알림: [경고: 현실 붕괴 임박. 파트너에게 이 모든 사태의 책임을 전가하시겠습니까? 수락 시, 당신만은 구원받을 수 있습니다.]\n이현의 내면: '나만이라도 살 수 있다면... 서아만 버린다면 내 일상은 원래대로 돌아오는 걸까?'",
                             choices: [
-                                { text: "[A] 수락한다.\n(숨을 헐떡이는 서아와의 눈 맞춤을 피한 채, 떨리는 손가락으로 수락 버튼을 누름)", style: "choice-a", action: () => { state.desire = 100; addLog("희생/파멸 확정"); }, next: "ENDING_B" },
-                                { text: "[B] 거절한다.\n(손톱이 파고들어 핏물이 맺힐 정도로 주먹을 쥐고, 홀로그램을 거칠게 흩뿌려버림)", style: "choice-b", action: () => { state.crack = 100; addLog("균열 극대화"); }, next: "S09" }
+                                { text: "[A] 수락한다.", style: "choice-a", action: () => { state.desire = 100; addLog("희생/파멸 확정"); }, next: "ENDING_B" },
+                                { text: "[B] 거절한다.", style: "choice-b", action: () => { state.crack = 100; addLog("균열 극대화"); }, next: "S09" }
                             ]
                         };
                     }
@@ -429,7 +477,7 @@
                 text: "[배경] 형태를 잃고 녹아내리는 세상. 짙은 정적 속에서 역장 할머니가 다시 등장한다. 그녀의 눈동자는 심연처럼 깊고 서늘하다.\n\n역장 할머니: \"세상이 무너지는 꼴을 기어이 보고야 말았구나. 자, 마지막 기회다. 너 혼자만이라도 흠결 없는 완벽한 삶을 챙겨 달아날 텐가? 아니면... 이 모든 지독한 업보를 짊어지고, 앱을 깔기 전 그 보잘것없는 처음으로 모든 걸 되돌릴 텐가?\"",
                 choices: [
                     { 
-                        text: "[A] \"모두 없던 일로 해줘. 우리가 이 저주받은 앱을 깔기 전으로 돌려놓으라고!\"\n(할머니의 서늘한 눈을 똑바로 쳐다보며 단전에서부터 끓어오르는 목소리로 외침)", 
+                        text: "[A] \"모두 없던 일로 해줘. 우리가 이 저주받은 앱을 깔기 전으로 돌려놓으라고!\"", 
                         style: "choice-a", 
                         action: () => { state.tokens -= 1; addLog("롤백 판정 중..."); }, 
                         next: () => {
@@ -439,7 +487,7 @@
                         }
                     },
                     { 
-                        text: "[B] \"나만이라도 완벽하게 살게 해줘! 더 이상 이 지옥에서 뒹굴고 싶지 않아!\"\n(극에 달한 공포와 일그러진 욕망이 가득 찬 눈빛으로 허공을 향해 절규함)", 
+                        text: "[B] \"나만이라도 완벽하게 살게 해줘! 더 이상 이 지옥에서 뒹굴고 싶지 않아!\"", 
                         style: "choice-b", 
                         action: () => { state.desire = 100; addLog("욕망 극대화 판정..."); }, 
                         next: "ENDING_B"
@@ -458,7 +506,7 @@
             },
             "ENDING_C": {
                 title: "엔딩 C: 진정한 귀환", video: "END.mp4", 
-                text: "[배경] 일상을 완벽하게 회복한 평범하고 밝은 대낮의 번화가 거리. 눈부신 햇살이 쏟아지고, 사람들의 기분 좋은 소음이 거리를 가득 채우고 있다.\n\n이현은 그 길 한가운데 서 있다. 어두웠던 영혼역의 잔재는 씻은 듯이 사라졌고, 실체를 완벽히 되찾은 그녀의 모습은 그 어느 때보다 따뜻하고 생기가 넘친다.\n\n이현: (고개를 들어 맑은 하늘을 올려다보며, 입가에 환한 미소가 번진다) \"오늘따라... 날씨가 정말 좋네.\"\n\n활기찬 표정의 군중들이 이현의 곁을 자연스럽게 스쳐 지나간다. 누군가 떨어뜨린 전단지, 멀리서 들려오는 카페의 음악 소리, 횡단보도의 파란불. 이현은 작게 심호흡을 하며, 그토록 바랐던 평화롭고 행복한 일상 속으로 천천히 발걸음을 내디돈다. 모든 것이 온전히, 제자리로 돌아왔다.",
+                text: "[배경] 일상을 완벽하게 회복한 평범하고 밝은 대낮의 번화가 거리. 눈부신 햇살이 쏟아지고, 사람들의 기분 좋은 소음이 거리를 가득 채우고 있다.\n\n이현은 그 길 한가운데 서 있다. 어두웠던 영혼역의 잔재는 씻은 듯이 사라졌고, 실체를 완벽히 되찾은 그녀의 모습은 그 어느 때보다 따뜻하고 생기가 넘친다.\n\n이현: \"오늘따라... 날씨가 정말 좋네.\"\n\n활기찬 표정의 군중들이 이현의 곁을 자연스럽게 스쳐 지나간다. 누군가 떨어뜨린 전단지, 멀리서 들려오는 카페의 음악 소리, 횡단보도의 파란불. 이현은 작게 심호흡을 하며, 그토록 바랐던 평화롭고 행복한 일상 속으로 천천히 발걸음을 내디돈다. 모든 것이 온전히, 제자리로 돌아왔다.",
                 choices: [{ text: "처음으로 돌아가기", style: "start-btn cinematic-font", action: () => { initGame(); }, next: "TITLE" }]
             }
         };
@@ -471,7 +519,6 @@
             
             updateUI();
             
-            // 미디어 전환: 버그 수정을 위해 이벤트 리스너를 src 설정보다 위에 배치
             elVideoStage.style.opacity = '0';
             elImageStage.style.opacity = '0';
             
@@ -480,7 +527,6 @@
                     elImageStage.style.display = 'none';
                     elVideoStage.style.display = 'block';
                     
-                    // [중요!] src 값을 넣기 전 이벤트를 먼저 준비합니다 (로컬 버그 수정)
                     elVideoStage.onloadeddata = () => {
                         elVideoStage.style.opacity = '1';
                         elVideoStage.play().catch(e => console.log("자동재생 방지 정책:", e));
@@ -493,7 +539,6 @@
                     elVideoStage.pause();
                     elImageStage.style.display = 'block';
                     
-                    // [중요!] src 값을 넣기 전 이벤트를 먼저 준비합니다 (로컬 버그 수정)
                     elImageStage.onload = () => {
                         elImageStage.style.opacity = '1';
                     };
